@@ -1,0 +1,9 @@
+<h1>Welcome to my Blog!</h1>
+
+<a href= '/login'>Login</a>
+
+  <% @entries.reverse_each do |entry| %>
+  <h2><%= link_to entry.title, entry %></h2>
+  <h3><%= entry.created_at%></h3>
+  <h3><%= entry.updated_at%></h3>
+  <% end %>
