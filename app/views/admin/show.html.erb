@@ -3,6 +3,9 @@
 <h3>Hello, <%= @user.first_name%></h3>
 <h4>Admin Status: <%= @user.admin_status %> </h4>
 
+<!-- need to make this only accessible from admin -->
+<p><%= link_to 'Create a new post!', new_entry_path %></p>
+
 <form method="POST" action="/session">
     <input name="authenticity_token" value="<%= form_authenticity_token() %>" type="hidden">
     <input name="_method" value="DELETE" type="hidden">

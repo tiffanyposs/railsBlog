@@ -1,9 +1,26 @@
 <h1>Welcome to my Blog!</h1>
 
-<a href= '/login'>Login</a>
+
+<% if @user %>
+<p> You're logged in as: <%= @user.username%> </p>
+<% end %>
+
+
+<% if @user %>
+ <form method="POST" action="/session">
+   <input name="authenticity_token" value="<%= form_authenticity_token() %>" type="hidden">
+   <input name="_method" value="DELETE" type="hidden">
+   <button>Logout</button>
+ </form>
+<% else %>
+ <a href="/login">Login</a>
+<% end %>
+
+
 
   <% @entries.reverse_each do |entry| %>
   <h2><%= link_to entry.title, entry %></h2>
+  <p><%= entry.content[0, 200] %></p>
   <h3><%= entry.created_at%></h3>
   <h3><%= entry.updated_at%></h3>
   <% end %>

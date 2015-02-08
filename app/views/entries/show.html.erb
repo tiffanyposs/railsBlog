@@ -3,4 +3,11 @@
 <p><%= @entry.created_at %></p>
 <p><%= @entry.updated_at %></p>
 
+<p>Entry Id: <%= @entry.id %></p>
+
+
+<%= link_to 'delete', @entry, method: :delete %>
+
+<%= link_to 'edit', edit_entry_path(@entry) %>
+
 <%= link_to "Home", entries_path %>
