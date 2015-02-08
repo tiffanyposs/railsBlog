@@ -5,6 +5,54 @@
 
 <p>Entry Id: <%= @entry.id %></p>
 
+<!--  -->
+
+<% if @user %>
+<p> You're logged in as: <%= @user.username%> </p>
+<% end %>
+
+<!-- This shows the comments -->
+<% @entry.comments.each do |comment| %>
+	<h4> <%= User.find(comment.user_id).username %> </h4>
+  <p>
+    <%= comment.title %>
+  </p>
+ 
+  <p>
+
+    <strong>Comment:</strong>
+    <%= comment.content %>
+  </p>
+<% end %>
+
+
+
+ <!-- This adds the comment -->
+ <% if @user %>
+<h2>Add a comment:</h2>
+<%= form_for([@entry, @entry.comments.build]) do |f| %>
+
+  <p>
+    <%= f.label :title %><br>
+    <%= f.text_area :title %>
+  </p>
+
+  <p>
+	<%= f.hidden_field :user_id, :value => @user.id %>
+  </p>
+
+  <p>
+    <%= f.label :content %><br>
+    <%= f.text_area :content %>
+  </p>
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>
+<% end %>
+
+
+
 
 <%= link_to 'delete', @entry, method: :delete %>
 

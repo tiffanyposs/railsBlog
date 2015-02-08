@@ -9,7 +9,7 @@ class SessionController < ApplicationController
         if user && user.authenticate(params[:password]) && user.admin_status == true
             session[:user_id] = user.id
             #needs to redirect to the create new post page
-            redirect_to '/admin'
+            redirect_to '/user'
         elsif user && user.authenticate(params[:password]) && user.admin_status == false
             session[:user_id] = user.id
             redirect_to '/'

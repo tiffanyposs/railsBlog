@@ -1,12 +1,17 @@
 Rails.application.routes.draw do
   root 'entries#index'
-  resources :entries
+
+  resources :entries do
+   resources :comments
+   resources :users
+  end
+
 
   get '/login' => 'session#new'
 
   post '/session' => 'session#create'
 
-  get '/admin' => 'admin#show'
+  get '/user' => 'user#show'
 
   delete '/session' => 'session#destroy'
 end
