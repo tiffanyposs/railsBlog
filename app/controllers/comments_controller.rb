@@ -14,6 +14,13 @@ class CommentsController < ApplicationController
     @comment = @entry.comments.create(comment_params)
     redirect_to entry_path(@entry)
   end
+
+   def destroy
+    @entry = Entry.find(params[:entry_id])
+    @comment = @entry.comments.find(params[:id])
+    @comment.destroy
+    redirect_to entry_path(@entry)
+  end
  
   private
     def comment_params
@@ -22,7 +29,7 @@ class CommentsController < ApplicationController
 
 end
 
-
+#Need to add delete and edit methods for comments.
 
 
 

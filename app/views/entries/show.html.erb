@@ -8,23 +8,38 @@
 <!--  -->
 
 <% if @user %>
-<p> You're logged in as: <%= @user.username%> </p>
+<p> You're logged in as: <%= @user.username%></p>
 <% end %>
 
 <!-- This shows the comments -->
 <% @entry.comments.each do |comment| %>
+
 	<h4> <%= User.find(comment.user_id).username %> </h4>
+
   <p>
     <%= comment.title %>
   </p>
  
   <p>
-
     <strong>Comment:</strong>
     <%= comment.content %>
   </p>
-<% end %>
 
+
+<!--   this allows only the user that posted a comment to delete it, or anyone that
+  has admin status -->
+  <% if @user %>
+  <% if @user.id.to_i == comment.user_id.to_i || @user.admin_status == true %>
+  <h4>
+  <%= link_to 'Destroy Comment', [comment.entry, comment],
+               method: :delete,
+               data: { confirm: 'Are you sure?' } %>
+   </h4>
+   <% end %>
+   <% end %>
+   <p>END COMMENT</p>
+<% end %>
+<!-- end each loop -->
 
 
  <!-- This adds the comment -->
